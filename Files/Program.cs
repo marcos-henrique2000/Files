@@ -7,18 +7,23 @@ namespace Files
     {
         static void Main(string[] args)
         {
-            string path = @"C:\Users\mac1005\source\repos\Files\file1.txt";
+            string sourcePath = @"C:\Users\mac1005\source\repos\Files\file1.txt";
+            string targetPath = @"C:\Users\mac1005\source\repos\Files\file2.txt";
 
             try
             {
-                using (StreamReader sr = File.OpenText(path))
+                string[] lines = File.ReadAllLines(sourcePath);
+
+                using (StreamWriter sw = File.AppendText(targetPath))
                 {
-                    while (!sr.EndOfStream)
+                    foreach(string line in lines)
                     {
-                        string line = sr.ReadLine();
-                        Console.WriteLine(line);
+                        sw.WriteLine(line.ToUpper());
                     }
                 }
+
+
+
             }
             catch (IOException e)
             {
