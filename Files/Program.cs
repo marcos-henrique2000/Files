@@ -7,31 +7,32 @@ namespace Files
     {
         static void Main(string[] args)
         {
-            string sourcePath = @"C:\Users\mac1005\source\repos\Files\file1.txt";
-            string targetPath = @"C:\Users\mac1005\source\repos\Files\file2.txt";
+            string path = @"C:\Users\mac1005\Pictures";
 
             try
             {
-                string[] lines = File.ReadAllLines(sourcePath);
-
-                using (StreamWriter sw = File.AppendText(targetPath))
+                var folders = Directory.EnumerateDirectories(path, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("Folders:");
+                foreach(string s in folders)
                 {
-                    foreach(string line in lines)
-                    {
-                        sw.WriteLine(line.ToUpper());
-                    }
+                    Console.WriteLine(s);
                 }
 
+                Console.WriteLine();
+                var files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories);
+                Console.WriteLine("Files:");
+                foreach (string s in files)
+                {
+                    Console.WriteLine(s);
+                }
 
-
+                Directory.CreateDirectory(path + @"\newfolder");
             }
-            catch (IOException e)
+            catch(IOException e)
             {
                 Console.WriteLine("An error occurred");
                 Console.WriteLine(e.Message);
             }
-
-
         }
     }
 }
