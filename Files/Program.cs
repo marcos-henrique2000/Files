@@ -7,32 +7,16 @@ namespace Files
     {
         static void Main(string[] args)
         {
-            string path = @"C:\Users\mac1005\Pictures";
+            string path = @"C:\Users\mac1005\source\repos\Files\file1.txt";
 
-            try
-            {
-                var folders = Directory.EnumerateDirectories(path, "*.*", SearchOption.AllDirectories);
-                Console.WriteLine("Folders:");
-                foreach(string s in folders)
-                {
-                    Console.WriteLine(s);
-                }
-
-                Console.WriteLine();
-                var files = Directory.EnumerateFiles(path, "*.*", SearchOption.AllDirectories);
-                Console.WriteLine("Files:");
-                foreach (string s in files)
-                {
-                    Console.WriteLine(s);
-                }
-
-                Directory.CreateDirectory(path + @"\newfolder");
-            }
-            catch(IOException e)
-            {
-                Console.WriteLine("An error occurred");
-                Console.WriteLine(e.Message);
-            }
+            Console.WriteLine("DirectorySeparatorChar: " + Path.DirectorySeparatorChar);
+            Console.WriteLine("PathSeparator: " + Path.PathSeparator);
+            Console.WriteLine("GetDirectoryName: " + Path.GetDirectoryName(path));
+            Console.WriteLine("GetFileName: " + Path.GetFileName(path));
+            Console.WriteLine("GetExtension: " + Path.GetExtension(path));
+            Console.WriteLine("GetFileNameWithoutExtension: " + Path.GetFileNameWithoutExtension(path));
+            Console.WriteLine("GetFullPath: " + Path.GetFullPath(path));
+            Console.WriteLine("GetTempPath: " + Path.GetTempPath());
         }
     }
 }
