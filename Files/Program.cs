@@ -7,27 +7,29 @@ namespace Files
     {
         static void Main(string[] args)
         {
-            string sourcePath = @"C:\Users\mac1005\source\repos\Files\file1.txt";
-            string targetPath = @"C:\Users\mac1005\source\repos\Files\file2.txt";
+            string path = @"C:\Users\mac1005\source\repos\Files\file1.txt";
+
+            StreamReader sr = null;
 
             try
             {
-
-                FileInfo fileInfo = new FileInfo(sourcePath);
-                fileInfo.CopyTo(targetPath);
-
-                string[] lines = File.ReadAllLines(sourcePath);
-                foreach(string line in lines)
+                sr = File.OpenText(path);
+                while (!sr.EndOfStream)
                 {
+                    string line = sr.ReadLine();
                     Console.WriteLine(line);
                 }
-
-            }
-            catch (IOException e)
+                
+            }catch(IOException e)
             {
-                Console.WriteLine("An error occurred");
+                Console.WriteLine("An error accurred");
                 Console.WriteLine(e.Message);
             }
+            finally
+            {
+                if (sr != null) sr.Close();
+            }
+
         }
     }
 }
